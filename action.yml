@@ -74,7 +74,3 @@ runs:
          ${{ env.silent }} \                  
          ${{ env.output }} 
       shell: bash
-
-    - run: |
-        ls -la /usr/share/amass/wordlists/all.txt 
-      shell: bash
