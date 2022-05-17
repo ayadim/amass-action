@@ -63,6 +63,5 @@ runs:
          ${{ env.config }} \
          ${{ env.brute }} \
          ${{ env.src }} \
-         ${{ env.ipv4 }} \                           
-         ${{ env.output }} \
+         ${{ env.ipv4 }} > ${{ env.output }} 
       shell: bash
