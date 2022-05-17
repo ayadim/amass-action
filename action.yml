@@ -37,7 +37,7 @@ inputs:
   output:
     description: "File to save output result"
     required: false
-    default: "vt-result.log"   
+    default: "amass-result.txt"   
 
 
 
