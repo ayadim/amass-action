@@ -1,4 +1,4 @@
-This gau Action makes it easy to orchestrate amass with GitHub Action. Integrate gau into powerful continuous security workflows and make it part of your secure software development life cycle.
+This Amass Action makes it easy to orchestrate amass with GitHub Action. Integrate gau into powerful continuous security workflows and make it part of your secure software development life cycle.
 
 Available Inputs
 ------
