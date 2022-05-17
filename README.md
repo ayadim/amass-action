@@ -20,7 +20,7 @@ Example
 
 **Workflow** - `.github/workflows/amass.yml`
 
-**include Subdomains**
+
 ```yaml
 
 name: 💥 amass - Amass Enum
