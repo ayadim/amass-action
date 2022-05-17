@@ -15,7 +15,8 @@ Available Inputs
 | `output`          | File to save output result (default-amass-log.txt). | false    |
 
 
-**Example**
+Example
+------
 
 **Workflow** - `.github/workflows/amass.yml`
 
