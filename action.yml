@@ -8,7 +8,7 @@ inputs:
 
   domain:
     description: "domain to enumerate"
-    required: false   
+    required: true   
 
   config:
     description: "Path to the INI configuration file."
@@ -25,7 +25,7 @@ inputs:
     default: false       
 
   ipv4:
-    description: "Print data sources for the discovered names"
+    description: "Show the IPv4 addresses for discovered names"
     required: false
     default: false
 
@@ -34,10 +34,15 @@ inputs:
     required: false
     default: false    
 
+  alts:
+    description: "Enable generation of altered names"
+    required: false
+    default: false        
+
   output:
     description: "File to save output result"
     required: false
-    default: "amass-result.txt"   
+    default: "amass-log.txt"   
 
 
 
@@ -47,13 +52,14 @@ runs:
   steps:
     - run: |
         [ ! -x /home/runner/go/bin/gau ] && go install -v github.com/OWASP/Amass/v3/...@master
-        [ ! -z ${{ inputs.domain }} ] && echo "domain=-d=${{ inputs.domain}} " >> $GITHUB_ENV
-        [ ! -z ${{ inputs.config }} ] && echo "config=-config=${{ inputs.config}} " >> $GITHUB_ENV
-        [ ! -z ${{ inputs.brute }} ] && echo "brute=-brute=${{ inputs.brute}} " >> $GITHUB_ENV
-        [ ! -z ${{ inputs.src }} ] && echo "src=-src=${{ inputs.src}} " >> $GITHUB_ENV
-        [ ! -z ${{ inputs.ipv4 }} ] && echo "ipv4=-ipv4=${{ inputs.ipv4}}  " >> $GITHUB_ENV
-        [ ! -z ${{ inputs.silent }} ] && echo "silent=-silent=${{ inputs.silent}} " >> $GITHUB_ENV                                                                 
-        [ ! -z ${{ inputs.output }} ] && echo "output=-o=${{ inputs.output}}" >> $GITHUB_ENV      
+        [ ! -z ${{ inputs.domain }} ] && echo "domain=-d=${{ inputs.domain }} " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.config }} ] && echo "config=-config=${{ inputs.config }} " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.brute }} ] && echo "brute=-brute=${{ inputs.brute }} " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.src }} ] && echo "src=-src=${{ inputs.src }} " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.ipv4 }} ] && echo "ipv4=-ipv4=${{ inputs.ipv4 }}  " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.silent }} ] && echo "silent=-silent=${{ inputs.silent }} " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.alts }} ] && echo "alts=-alts=${{ inputs.alts }} " >> $GITHUB_ENV                                                                         
+        [ ! -z ${{ inputs.output }} ] && echo "output=-o=${{ inputs.output}} " >> $GITHUB_ENV      
         echo "/home/runner/go/bin/" >> $GITHUB_PATH
       shell: bash
 
@@ -64,5 +70,11 @@ runs:
          ${{ env.brute }} \
          ${{ env.src }} \
          ${{ env.ipv4 }} \
+         ${{ env.alts }} \
+         ${{ env.silent }} \                  
          ${{ env.output }} 
+      shell: bash
+
+    - run: |
+        ls -la /usr/share/amass/wordlists/all.txt 
       shell: bash

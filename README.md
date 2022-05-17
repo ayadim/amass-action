@@ -1,5 +1,18 @@
 This gau Action makes it easy to orchestrate amass with GitHub Action. Integrate gau into powerful continuous security workflows and make it part of your secure software development life cycle.
 
+Available Inputs
+------
+
+| Key               | Description                                         | Required |
+| ----------------- | --------------------------------------------------- | -------- |
+| `domain`          | Domain to enumerate.                                | true     |
+| `config `         | Path to the INI configuration file.                 | false    |
+| `brute`           | Execute brute forcing after searches.               | false    |
+| `src`             | Print data sources for the discovered names.        | false    |
+| `ipv4`            | Show the IPv4 addresses for discovered names.       | false    |
+| `alts`            | Enable generation of altered names.                 | false    |
+| `silent`          | Disable all output during execution.                | false    |
+| `output`          | File to save output result (default-amass-log.txt). | false    |
 
 
 **Example**
@@ -28,63 +41,20 @@ jobs:
       - name: 💥 amass - assets Enum
         uses: ayadim/amass-action@main
         with:
-          urls: input-data/gau-domains.txt
-          threads: 10
+          domain: target.com
+          brute: true
+          ipv4: true
+          alts: true
 
       - name: GitHub Workflow artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: amass.log
+          name: result
           path: amass.log
 
 
 
 ```
 
-**include Subdomains**
-
-```yaml 
-
-name: 💥 gau - archive crawler
-#https://github.com/ayadim/gau-action
-on:
-    schedule:
-      - cron: '0 0 * * *'
-    workflow_dispatch:
-
-jobs:
-  gau-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
-        with:
-          go-version: 1.17
-
-      - name: 💥 gau - archive crawler
-        uses: ayadim/gau-action@main
-        with:
-          urls: input-data/gau-domains.txt
-          threads: 10
-          subdomains: true
-
-      - name: GitHub Workflow artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: gau.log
-          path: gau.log
 
 
-
-```
-
-Available Inputs
-------
-
-| Key               | Description                                         | Required |
-| ----------------- | --------------------------------------------------- | -------- |
-| `urls`            | List of urls to run nuclei scan                     | true     |
-| `threads	`       | Custom templates directory/file to run nuclei scan  | false    |
-| `subdomains`      | include subdomains of target domain                 | false    |
-| `output`          | File to save output result (default - nuclei.log)   | false    |
-| `blacklist`       | list of extensions to skip : 'jpg,txt'              | false    |
