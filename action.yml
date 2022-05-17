@@ -64,5 +64,5 @@ runs:
          ${{ env.brute }} \
          ${{ env.src }} \
          ${{ env.ipv4 }} \                           
-         ${{ env.output }}
+         ${{ env.output }} \
       shell: bash
