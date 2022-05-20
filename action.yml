@@ -29,5 +29,5 @@ runs:
       shell: bash
 
     - run: |
-        /home/runner/go/bin/amass enum -src -ipv4 -alts -config=${{ inputs.config }} -d=${{ inputs.domain }} -o=${{ inputs.output }}      
+        /home/runner/go/bin/amass enum -src  -config=${{ inputs.config }} -o=${{ inputs.output }}      
       shell: bash
