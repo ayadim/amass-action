@@ -47,7 +47,7 @@ runs:
   steps:
     - run: |
         [ ! -x /home/runner/go/bin/gau ] && go install -v github.com/OWASP/Amass/v3/...@master
-        [ ! -z ${{ inputs.domain }} ] && echo "domain=-d=${{ inputs.domain}} " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.domain }} ] && echo "domain=-d ${{ inputs.domain}} " >> $GITHUB_ENV
         [ ! -z ${{ inputs.config }} ] && echo "config=-config=${{ inputs.config}} " >> $GITHUB_ENV
         [ ! -z ${{ inputs.brute }} ] && echo "brute=-brute=${{ inputs.brute}} " >> $GITHUB_ENV
         [ ! -z ${{ inputs.src }} ] && echo "src=-src=${{ inputs.src}} " >> $GITHUB_ENV
