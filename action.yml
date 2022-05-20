@@ -29,6 +29,11 @@ inputs:
     required: false
     default: false
 
+  alts:
+    description: "Enable generation of altered names"
+    required: false
+    default: false      
+
   silent:
     description: "Disable all output during execution"
     required: false
