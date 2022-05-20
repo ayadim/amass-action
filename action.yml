@@ -29,15 +29,16 @@ inputs:
     required: false
     default: false
 
+  silent:
+    description: "Disable all output during execution"
+    required: false
+    default: false    
+
   alts:
     description: "Enable generation of altered names"
     required: false
     default: false      
 
-  silent:
-    description: "Disable all output during execution"
-    required: false
-    default: false    
 
   output:
     description: "File to save output result"
@@ -65,12 +66,12 @@ runs:
 
     - run: |
         /home/runner/go/bin/amass enum \
-         ${{ env.domain }} \
-         ${{ env.config }} \
-         ${{ env.brute }} \
-         ${{ env.src }} \
-         ${{ env.ipv4 }} \
-         ${{ env.silent }} \
-         ${{ env.alts }} \
-         ${{ env.output }}
+         ${{env.domain }} \
+         ${{env.config }} \
+         ${{env.brute }} \
+         ${{env.src }} \
+         ${{env.ipv4 }} \
+         ${{env.silent }} \
+         ${{env.alts }} \
+         ${{env.output }}
       shell: bash
