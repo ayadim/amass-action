@@ -10,10 +10,6 @@ inputs:
     description: "domain to enumerate"
     required: false   
 
-  config:
-    description: "Path to the INI configuration file."
-    required: false      
-
   brute:
     description: "Execute brute forcing after searches"
     required: false
@@ -54,9 +50,8 @@ runs:
     - run: |
         [ ! -x /home/runner/go/bin/gau ] && go install -v github.com/OWASP/Amass/v3/...@master
         [ ! -z ${{ inputs.domain }} ] && echo "domain=-d=${{ inputs.domain }} " >> $GITHUB_ENV
-        [ ! -z ${{ inputs.config }} ] && echo "config=-config=${{ inputs.config }} " >> $GITHUB_ENV
         [ ! -z ${{ inputs.brute }} ] && echo "brute=-brute=${{ inputs.brute }} " >> $GITHUB_ENV
-        [ ! -z ${{ inputs.src }} ] && echo "src=-src=${{ inputs.src}} " >> $GITHUB_ENV
+        [ ! -z ${{ inputs.src }} ] && echo "src=-src=${{ inputs.src }} " >> $GITHUB_ENV
         [ ! -z ${{ inputs.ipv4 }} ] && echo "ipv4=-ipv4=${{ inputs.ipv4 }} " >> $GITHUB_ENV
         [ ! -z ${{ inputs.silent }} ] && echo "silent=-silent ${{ inputs.silent }} " >> $GITHUB_ENV 
         [ ! -z ${{ inputs.alts }} ] && echo "alts=-alts=${{ inputs.alts }} " >> $GITHUB_ENV                                                                        
@@ -67,7 +62,6 @@ runs:
     - run: |
         /home/runner/go/bin/amass enum \
          ${{env.domain }} \
-         ${{env.config }} \
          ${{env.brute }} \
          ${{env.src }} \
          ${{env.ipv4 }} \
