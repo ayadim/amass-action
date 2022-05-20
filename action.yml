@@ -6,10 +6,6 @@ branding:
 
 inputs:
 
-  domain:
-    description: "domain to enumerate"
-    required: false   
-
   output:
     description: "File to save output result"
     required: false
@@ -17,7 +13,7 @@ inputs:
 
   config:
     description: "Path to the INI configuration file."
-    required: false     
+    required: true     
 
 
 runs:
