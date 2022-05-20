@@ -67,5 +67,5 @@ runs:
          ${{ env.ipv4 }} \
          ${{ env.silent }} \
          ${{ env.alts }} \
-         ${{ env.output }} \
+         ${{ env.output }}
       shell: bash
