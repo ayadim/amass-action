@@ -15,7 +15,9 @@ inputs:
     required: false
     default: "amass-result.txt"   
 
-
+  config:
+    description: "Path to the INI configuration file."
+    required: false     
 
 
 runs:
@@ -23,11 +25,9 @@ runs:
   steps:
     - run: |
         [ ! -x /home/runner/go/bin/gau ] && go install -v github.com/OWASP/Amass/v3/...@master
-        [ ! -z ${{ inputs.domain }} ] && echo "domain=-d=${{ inputs.domain }} " >> $GITHUB_ENV                                                                   
-        [ ! -z ${{ inputs.output }} ] && echo "output=-o=${{ inputs.output }} " >> $GITHUB_ENV   
         echo "/home/runner/go/bin/" >> $GITHUB_PATH
       shell: bash
 
     - run: |
-        /home/runner/go/bin/amass enum -src -brute -ipv4 -d=${{ inputs.domain }} -o=${{ inputs.output }}      
+        /home/runner/go/bin/amass enum -src -brute -ipv4 -alts -config=${{ inputs.config }} -d=${{ inputs.domain }} -o=${{ inputs.output }}      
       shell: bash
